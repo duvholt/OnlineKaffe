@@ -22,3 +22,13 @@ if (module.hot) {
     render(App);
   });
 }
+
+if (Notification.permission === 'default') {
+  Notification.requestPermission((permission) => {
+    if (permission === 'granted') {
+      new Notification('Kaffevarsling er slått på', {
+        body: 'Du vil nå få varsler om nytraktet kaffe så lenge vinduet er åpent',
+      });
+    }
+  });
+}

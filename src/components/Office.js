@@ -5,12 +5,20 @@ import Loader from './Loader';
 
 const API_ONLINE = 'https://passoa.online.ntnu.no/api/office/online';
 
+
+
+const notify = () => {
+  new Notification('Nytraktet kaffe på Onlinekontoret!');
+};
+
 class Office extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       date: null,
+      pots: null,
+      status: null,
       loaded: false,
     };
     this.fetchCoffee();
@@ -23,6 +31,9 @@ class Office extends Component {
     .then((data) => {
       const { date, pots } = data.coffee;
       const { status } = data.status;
+      if (this.state.loaded && pots > this.state.pots) {
+        notify();
+      }
       this.setState({
         date,
         pots,
