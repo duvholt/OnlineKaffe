@@ -14,6 +14,7 @@ class Office extends Component {
       loaded: false,
     };
     this.fetchCoffee();
+    setInterval(this.fetchCoffee.bind(this), 60 * 1000);
   }
 
   fetchCoffee() {
