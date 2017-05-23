@@ -1,0 +1,29 @@
+body {
+  background: #b2a896;
+  padding: 2rem 0;
+  /*font-family: 'Noto Sans', sans-serif;*/
+  font-family: 'Noto Serif', serif;
+}
+
+.app {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 40rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 3rem;
+  color: #ededed;
+}
+
+.credits {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #a84d01;
+}
+
+.credits a {
+  color: #491e0a;
+}

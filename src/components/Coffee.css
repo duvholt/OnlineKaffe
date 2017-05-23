@@ -1,0 +1,20 @@
+.date {
+  margin-top: 1rem;
+  color: #491e0a;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.pots {
+  margin-top: 1rem;
+  color: #a84d01;
+  font-size: 1.5rem;
+}
+
+.icon {
+  margin: 1rem auto 0;
+  background: url('../icons/coffee.svg');
+  background-size: 12rem;
+  height: 12rem;
+  width: 12rem;
+}
