@@ -1,0 +1,10 @@
+.status {
+  margin-top: 0.5rem;
+  font-size: 1.5em;
+  color: #ff6e4e;
+  font-weight: bold;
+}
+
+.open {
+  color: #477711;
+}

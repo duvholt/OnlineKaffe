@@ -4,7 +4,7 @@ import { AppContainer as HotAppContainer } from 'react-hot-loader';
 import moment from 'moment';
 import App from './components/App';
 
-moment.lang('nb');
+moment.locale('nb');
 
 const render = (Root) => {
   ReactDOM.render(

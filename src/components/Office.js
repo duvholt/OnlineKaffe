@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Coffee from './Coffee';
+import Status from './Status';
 import Loader from './Loader';
 
 const API_ONLINE = 'https://passoa.online.ntnu.no/api/office/online';
@@ -20,23 +21,28 @@ class Office extends Component {
     .then(data => data.json())
     .then((data) => {
       const { date, pots } = data.coffee;
+      const { status } = data.status;
       this.setState({
         date,
         pots,
+        status,
         loaded: true,
       });
     });
   }
 
   render() {
-    const { loaded, date, pots } = this.state;
+    const { loaded, date, pots, status } = this.state;
     if (!loaded) {
       return (
         <Loader />
       );
     }
     return (
-      <Coffee date={date} pots={pots} />
+      <div>
+        <Status open={status} />
+        <Coffee date={date} pots={pots} />
+      </div>
     );
   }
 
