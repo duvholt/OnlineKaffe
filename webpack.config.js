@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const path = require('path');
 
@@ -55,5 +56,6 @@ module.exports = {
         module.context && module.context.indexOf('node_modules') !== -1
       ),
     }),
+    new FaviconsWebpackPlugin('./src/icons/coffee.svg'),
   ],
 };
