@@ -1,0 +1,23 @@
+.loader {
+  border-radius: 100%;
+  margin-top: 2rem;
+  border: 3px solid #7a6646;
+  border-bottom-color: transparent;
+  height: 3rem;
+  width: 3rem;
+  background: 0 0!important;
+  display: inline-block;
+  animation: rotate .9s 0s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(.6);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
