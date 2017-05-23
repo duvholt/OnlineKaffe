@@ -1,7 +1,6 @@
 body {
-  background: #b2a896;
-  padding: 2rem 0;
-  /*font-family: 'Noto Sans', sans-serif;*/
+  background: #f0e2c7;
+  padding: 2rem 1rem;
   font-family: 'Noto Serif', serif;
 }
 
@@ -14,7 +13,7 @@ body {
 .title {
   margin: 0;
   font-size: 3rem;
-  color: #ededed;
+  color: #9f8c6e;
 }
 
 .credits {
