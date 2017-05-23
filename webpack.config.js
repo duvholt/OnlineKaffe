@@ -10,7 +10,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '/build/'),
-    filename: 'index.js',
+    filename: '[name].js',
     publicPath: '/',
   },
   resolve: {
@@ -40,7 +40,7 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: 'url-loader',
-      }
+      },
     ],
   },
   plugins: [
