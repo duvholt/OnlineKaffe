@@ -12,7 +12,7 @@ body {
 
 .title {
   margin: 0;
-  font-size: 3rem;
+  font-size: 2rem;
   color: #9f8c6e;
 }
 
@@ -25,4 +25,10 @@ body {
 
 .credits a {
   color: #491e0a;
+}
+
+@media(min-width: 28rem) {
+  .title {
+    font-size: 3rem;
+  }
 }
