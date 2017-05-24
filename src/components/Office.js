@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { socketConnect } from 'socket.io-react';
 import Coffee from './Coffee';
 import Status from './Status';
 import Loader from './Loader';
-
-const API_ONLINE = 'https://passoa.online.ntnu.no/api/office/online';
-
+import { API_HOST, API_OFFICE } from '../constants';
 
 
 const notify = () => {
+  // New is required
+  // eslint-disable-next-line no-new
   new Notification('Nytraktet kaffe på Onlinekontoret!');
 };
 
@@ -22,11 +23,17 @@ class Office extends Component {
       loaded: false,
     };
     this.fetchCoffee();
-    setInterval(this.fetchCoffee.bind(this), 60 * 1000);
+    props.socket.emit('subscribe', props.name);
+    props.socket.on('coffee', this.newCoffee.bind(this));
+    props.socket.on('status', this.newStatus.bind(this));
+  }
+
+  apiUrl() {
+    return API_HOST + API_OFFICE + this.props.name;
   }
 
   fetchCoffee() {
-    fetch(API_ONLINE)
+    fetch(this.apiUrl())
     .then(data => data.json())
     .then((data) => {
       const { date, pots } = data.coffee;
@@ -43,6 +50,16 @@ class Office extends Component {
     });
   }
 
+  newCoffee(data) {
+    const { date, pots } = data;
+    this.setState({ date, pots });
+    notify();
+  }
+
+  newStatus(data) {
+    const { status } = data;
+    this.setState({ status });
+  }
   render() {
     const { loaded, date, pots, status } = this.state;
     if (!loaded) {
@@ -57,7 +74,14 @@ class Office extends Component {
       </div>
     );
   }
-
 }
 
-export default Office;
+Office.propTypes = {
+  name: PropTypes.string.isRequired,
+  socket: PropTypes.shape({
+    emit: PropTypes.func.isRequired,
+    on: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default socketConnect(Office);
