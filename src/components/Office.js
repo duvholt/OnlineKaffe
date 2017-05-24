@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { socketConnect } from 'socket.io-react';
 import Coffee from './Coffee';
 import Status from './Status';
