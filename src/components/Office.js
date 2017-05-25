@@ -4,13 +4,32 @@ import { socketConnect } from 'socket.io-react';
 import Coffee from './Coffee';
 import Status from './Status';
 import Loader from './Loader';
+import NotificationButton from './NotificationButton';
 import { API_HOST, API_OFFICE } from '../constants';
 
 
 const notify = () => {
-  // New is required
-  // eslint-disable-next-line no-new
-  new Notification('Nytraktet kaffe på Onlinekontoret!');
+  if (Notification.permission === 'granted') {
+    // New is required
+    // eslint-disable-next-line no-new
+    new Notification('Nytraktet kaffe på Onlinekontoret!');
+  }
+  else {
+    alert('Kaffevarsling har blitt skrudd på men du har ikke tillatt notifikasjoner i nettleseren');
+  }
+};
+
+const notifyPermission = () => {
+  if (Notification.permission === 'default') {
+    Notification.requestPermission((permission) => {
+      if (permission === 'granted') {
+        // eslint-disable-next-line no-new
+        new Notification('Kaffevarsling er slått på', {
+          body: 'Du vil nå få varsler om nytraktet kaffe så lenge vinduet er åpent',
+        });
+      }
+    });
+  }
 };
 
 class Office extends Component {
@@ -47,6 +66,7 @@ class Office extends Component {
         pots,
         status,
         loaded: true,
+        notifications: false,
       });
     });
   }
@@ -54,15 +74,27 @@ class Office extends Component {
   newCoffee(data) {
     const { date, pots } = data;
     this.setState({ date, pots });
-    notify();
+    if (this.state.notifications) {
+      notify();
+    }
   }
 
   newStatus(data) {
     const { status } = data;
     this.setState({ status });
   }
+
+  toggleNotifications() {
+    if (!this.state.notifications) {
+      notifyPermission();
+    }
+    this.setState({
+      notifications: !this.state.notifications,
+    });
+  }
+
   render() {
-    const { loaded, date, pots, status } = this.state;
+    const { loaded, date, pots, status, notifications } = this.state;
     if (!loaded) {
       return (
         <Loader />
@@ -72,6 +104,7 @@ class Office extends Component {
       <div>
         <Status open={status} />
         <Coffee date={date} pots={pots} />
+        <NotificationButton enabled={notifications} onClick={() => this.toggleNotifications()} />
       </div>
     );
   }

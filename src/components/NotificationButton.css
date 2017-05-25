@@ -1,0 +1,58 @@
+.container {
+  margin-top: 2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #3f3d39;
+}
+
+.button {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: right;
+  width: 8rem;
+  position: relative;
+  margin-left: 1rem;
+  padding: 0.75rem 1rem 0.75rem 1.25rem;
+  background: #a42b11;
+  background: linear-gradient(90deg, #359456 50%, #a42b11 50%);
+  border: 0.125rem solid #641c0c;
+  border-radius: 3px;
+  transition: 0.1s ease-in;
+  color: #fff;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:hover {
+  background: linear-gradient(90deg, #4dbe74 50%, #bd472e 50%);
+}
+
+.button:active {
+  box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.slider {
+  transition: 0.2s ease-in-out;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4rem;
+  background: whitesmoke;
+  border-radius: 1px;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.enabled .button {
+  text-align: left;
+  border-color: #0d4320;
+}
+
+.enabled .button:hover {
+}
+
+.enabled .slider {
+  transform: translateX(3.75rem);
+}
