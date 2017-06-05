@@ -45,7 +45,8 @@ const createHighcartConfig = (data) => ({
       const hour = this.series.xAxis.categories[this.point.x];
       const pots = this.point.value;
       const weekday = this.series.yAxis.categories[this.point.y];
-      return `<b>${pots}</b> kaffekanner ble laget kl <b>${hour}</b> på <b>${weekday.toLowerCase()}</b>`;
+      const potText = pots !== null ? `<b>${pots}</b>` : 'Ingen';
+      return `${potText} kaffekanner ble laget kl <b>${hour}</b> på <b>${weekday.toLowerCase()}</b>`;
     },
   },
 
