@@ -37,12 +37,7 @@ const createHighcartConfig = (data) => ({
   },
 
   legend: {
-    layout: 'vertical',
-    align: 'right',
-    margin: 0,
-    verticalAlign: 'top',
-    y: 25,
-    symbolHeight: 280,
+    enabled: false,
   },
 
   tooltip: {
