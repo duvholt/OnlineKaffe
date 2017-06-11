@@ -26,7 +26,7 @@ class Coffee extends Component {
     const { timeSince } = this.state;
     return (
       <div className={css.container}>
-        <div className={css.date}>
+        <div className={css.date} title={date}>
           { date !== null ?
             `Kaffen ble laget for ${timeSince}`
           :
