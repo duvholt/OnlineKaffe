@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.production.js"
+    "build": "webpack --config webpack.config.production.js",
+    "lint": "eslint src"
   },
   "dependencies": {
     "babel-core": "^6.24.1",

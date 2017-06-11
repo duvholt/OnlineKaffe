@@ -13,8 +13,9 @@ const notify = () => {
     // New is required
     // eslint-disable-next-line no-new
     new Notification('Nytraktet kaffe på Onlinekontoret!');
-  }
-  else {
+  } else {
+    // Display annoying alert if the user was dumb and disabled notifications in the browser
+    // eslint-disable-next-line no-alert
     alert('Kaffevarsling har blitt skrudd på men du har ikke tillatt notifikasjoner i nettleseren');
   }
 };

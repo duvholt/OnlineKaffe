@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactHighcharts from 'react-highcharts';
 import HeatMap from 'highcharts/modules/heatmap';
 import moment from 'moment';
@@ -14,13 +15,9 @@ const createHighcartConfig = data => ({
     plotBorderWidth: 1,
     backgroundColor: 'transparent',
   },
-
   credits: {
     enabled: false,
   },
-
-
-
   title: {
     style: {
       color: '#6d4626',
@@ -29,27 +26,22 @@ const createHighcartConfig = data => ({
     },
     text: 'Kaffe per time per ukedag',
   },
-
   xAxis: {
     categories: Array.from(new Array(24), (x, i) => i),
     tickLength: 0,
   },
-
   yAxis: {
     categories: ['Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'],
     title: null,
   },
-
   colorAxis: {
     min: 0,
     minColor: '#FFFFFF',
     maxColor: '#da6630',
   },
-
   legend: {
     enabled: false,
   },
-
   tooltip: {
     formatter: function formatter() {
       const hour = this.series.xAxis.categories[this.point.x];
@@ -59,7 +51,6 @@ const createHighcartConfig = data => ({
       return `${potText} kaffekanner ble laget kl <b>${hour}</b> på <b>${weekday.toLowerCase()}</b>`;
     },
   },
-
   series: [{
     borderWidth: 3,
     borderColor: '#ffffff',
@@ -67,11 +58,10 @@ const createHighcartConfig = data => ({
   }],
 });
 
-const groupPots = (pots) => {
-  return pots.reduce((dates, potDate) => {
+const groupPots = pots => (
+  pots.reduce((dates, potDate) => {
     const newDates = dates;
     const date = moment(potDate);
-    // const day = date.format('YYYY-MM-DD');
     const hour = date.get('hour');
     const weekday = date.weekday();
     if (newDates[hour] !== undefined) {
@@ -88,8 +78,8 @@ const groupPots = (pots) => {
       };
     }
     return newDates;
-  }, {});
-};
+  }, {})
+);
 
 const highChartData = (potData) => {
   const data = [];
@@ -120,7 +110,7 @@ class Stats extends Component {
   }
 
   apiUrl() {
-    const since = moment().subtract(7, 'days').toISOString();
+    const since = moment().subtract(70, 'days').toISOString();
     const limit = 100000; // silly
     return `${API_HOST}${API_COFFEE}${this.props.name}?since=${since}&limit=${limit}`;
   }
@@ -146,5 +136,9 @@ class Stats extends Component {
     );
   }
 }
+
+Stats.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 
 export default Stats;
