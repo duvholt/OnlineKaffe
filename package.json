@@ -20,6 +20,7 @@
     "eslint-plugin-react": "^7.0.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "favicons-webpack-plugin": "^0.0.7",
+    "highcharts": "^5.0.12",
     "html-webpack-plugin": "^2.28.0",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",

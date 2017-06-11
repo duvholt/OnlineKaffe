@@ -1,28 +1,38 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts';
 import HeatMap from 'highcharts/modules/heatmap';
-import HighchartsExporting from 'highcharts/modules/exporting';
 import moment from 'moment';
 import { API_HOST, API_COFFEE } from '../constants';
 
 HeatMap(ReactHighcharts.Highcharts);
-HighchartsExporting(ReactHighcharts.Highcharts);
 
-const createHighcartConfig = (data) => ({
+const createHighcartConfig = data => ({
   chart: {
     type: 'heatmap',
     marginTop: 40,
     marginBottom: 80,
     plotBorderWidth: 1,
+    backgroundColor: 'transparent',
+  },
+
+  credits: {
+    enabled: false,
   },
 
 
+
   title: {
+    style: {
+      color: '#6d4626',
+      fontWeight: 'bold',
+      fontFamily: '"Noto Serif", serif',
+    },
     text: 'Kaffe per time per ukedag',
   },
 
   xAxis: {
     categories: Array.from(new Array(24), (x, i) => i),
+    tickLength: 0,
   },
 
   yAxis: {
@@ -33,7 +43,7 @@ const createHighcartConfig = (data) => ({
   colorAxis: {
     min: 0,
     minColor: '#FFFFFF',
-    maxColor: ReactHighcharts.Highcharts.getOptions().colors[3],
+    maxColor: '#da6630',
   },
 
   legend: {
@@ -51,12 +61,9 @@ const createHighcartConfig = (data) => ({
   },
 
   series: [{
-    borderWidth: 1,
+    borderWidth: 3,
+    borderColor: '#ffffff',
     data,
-    dataLabels: {
-      enabled: true,
-      color: '#000000',
-    },
   }],
 });
 
