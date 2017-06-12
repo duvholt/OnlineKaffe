@@ -110,7 +110,7 @@ class Stats extends Component {
   }
 
   apiUrl() {
-    const since = moment().subtract(70, 'days').toISOString();
+    const since = moment().subtract(this.props.days, 'days').toISOString();
     const limit = 100000; // silly
     return `${API_HOST}${API_COFFEE}${this.props.name}?since=${since}&limit=${limit}`;
   }
@@ -137,7 +137,12 @@ class Stats extends Component {
   }
 }
 
+Stats.defaultProps = {
+  days: 7,
+};
+
 Stats.propTypes = {
+  days: PropTypes.number,
   name: PropTypes.string.isRequired,
 };
 
