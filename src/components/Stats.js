@@ -36,7 +36,7 @@ const createHighcartConfig = data => ({
   },
   colorAxis: {
     min: 0,
-    minColor: '#FFFFFF',
+    minColor: '#ebebeb',
     maxColor: '#da6630',
   },
   legend: {
