@@ -8,6 +8,10 @@ import { API_HOST, API_COFFEE } from '../../constants';
 
 HeatMap(ReactHighcharts.Highcharts);
 
+const pluralize = num => (
+  (num === 1) ? '' : 'r'
+);
+
 const createHighcartConfig = data => ({
   chart: {
     type: 'heatmap',
@@ -49,7 +53,7 @@ const createHighcartConfig = data => ({
       const pots = this.point.value;
       const weekday = this.series.yAxis.categories[this.point.y];
       const potText = pots !== null ? `<b>${pots}</b>` : 'Ingen';
-      return `${potText} kaffekanner ble laget kl <b>${hour}</b> på <b>${weekday.toLowerCase()}</b>`;
+      return `${potText} kaffekanne${pluralize(pots)} ble laget kl <b>${hour}</b> på <b>${weekday.toLowerCase()}</b>`;
     },
   },
   series: [{
