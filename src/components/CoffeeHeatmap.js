@@ -131,7 +131,12 @@ class Stats extends Component {
     const data = highChartData(groupPots(pots));
     return (
       <div style={{ marginTop: '2rem' }}>
-        <ReactHighcharts config={createHighcartConfig(data)} />
+        {
+          pots && pots.length > 0 ?
+            <ReactHighcharts config={createHighcartConfig(data)} />
+          :
+            'Det ble ikke laget kaffe i perioden du har valgt.'
+        }
       </div>
     );
   }
