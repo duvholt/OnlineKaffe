@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import ReactHighcharts from 'react-highcharts';
 import HeatMap from 'highcharts/modules/heatmap';
 import moment from 'moment';
-import { API_HOST, API_COFFEE } from '../constants';
+import Loader from '../Loader';
+import { API_HOST, API_COFFEE } from '../../constants';
 
 HeatMap(ReactHighcharts.Highcharts);
 
@@ -11,7 +12,7 @@ const createHighcartConfig = data => ({
   chart: {
     type: 'heatmap',
     marginTop: 40,
-    marginBottom: 80,
+    marginBottom: 30,
     plotBorderWidth: 1,
     backgroundColor: 'transparent',
   },
@@ -99,36 +100,51 @@ const highChartData = (potData) => {
   return data;
 };
 
-class Stats extends Component {
+class HeatmapChart extends Component {
+  static apiUrl(props) {
+    const since = moment().subtract(props.days, 'days').toISOString();
+    const limit = 100000; // silly
+    return `${API_HOST}${API_COFFEE}${props.name}?since=${since}&limit=${limit}`;
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {
       pots: [],
+      loading: true,
     };
-    this.fetch();
   }
 
-  apiUrl() {
-    const since = moment().subtract(this.props.days, 'days').toISOString();
-    const limit = 100000; // silly
-    return `${API_HOST}${API_COFFEE}${this.props.name}?since=${since}&limit=${limit}`;
+  componentDidMount() {
+    this.fetch(this.props);
   }
 
-  fetch() {
-    fetch(this.apiUrl())
+  componentWillReceiveProps(nextProps) {
+    this.fetch(nextProps);
+  }
+
+  fetch(props) {
+    this.setState({
+      loading: true,
+    });
+    fetch(HeatmapChart.apiUrl(props))
     .then(data => data.json())
     .then((data) => {
       const { pots } = data;
       this.setState({
         pots,
+        loading: false,
       });
     });
   }
 
   render() {
-    const { pots } = this.state;
+    const { pots, loading } = this.state;
     const data = highChartData(groupPots(pots));
+    if (loading) {
+      return <Loader />;
+    }
     return (
       <div style={{ marginTop: '2rem' }}>
         {
@@ -142,13 +158,13 @@ class Stats extends Component {
   }
 }
 
-Stats.defaultProps = {
+HeatmapChart.defaultProps = {
   days: 7,
 };
 
-Stats.propTypes = {
+HeatmapChart.propTypes = {
   days: PropTypes.number,
   name: PropTypes.string.isRequired,
 };
 
-export default Stats;
+export default HeatmapChart;

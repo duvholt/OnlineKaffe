@@ -1,0 +1,27 @@
+.button {
+  background: #a42b11;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border: 0.125rem solid #641c0c;
+  border-radius: 3px;
+  margin: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.button:focus {
+  outline: 0;
+}
+
+.button:hover {
+  background: #ba543e;
+}
+
+.active {
+  background: #d1a59c;
+}
+
+.active:hover {
+  background: #ddbcb6;
+}
